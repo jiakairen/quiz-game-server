@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Request new questions</title>
+  </head>
+  <body>
+    <button>Request New Questions</button>
+    <% for (q of quizSet) { %>
+    <p><%= q.question %></p>
+    <ul>
+      <li>Correct: <%= q.correctAnswer %></li>
+      <li>Incorrect: <%= q.incorrectAnswers.join(' / ') %></li>
+    </ul>
+    <% } %>
+  </body>
+</html>
+
+<script>
+  async function getQuiz() {
+    const { data } = await axios.get(
+      "https://the-trivia-api.com/api/questions?limit=5"
+    );
+    console.log(data);
+  }
+</script>

@@ -38,7 +38,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/request", async (req, res) => {
-  if (apiResponse.id) {
+  if (Math.floor(new Date().getTime() / 86400000) === apiResponse.id) {
     console.log("quizSet is on server");
     res.json(apiResponse);
   } else {

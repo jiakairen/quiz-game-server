@@ -39,7 +39,7 @@ app.get("/", (req, res) => {
 
 app.get("/request", async (req, res) => {
   if (Math.floor(new Date().getTime() / 86400000) === apiResponse.id) {
-    console.log("quizSet is on server");
+    console.log("quizSet is on server", apiResponse.id);
     res.json(apiResponse);
   } else {
     Quiz.find(
@@ -47,7 +47,9 @@ app.get("/request", async (req, res) => {
       (err, quizSet) => {
         if (err) res.send(err);
         if (quizSet[0] === undefined) {
-          console.log("cannot find quizSet on DB, requesting new quiz");
+          console.log(
+            "cannot find quizSet in DB, requesting new quiz from external API"
+          );
           const getNewQuiz = async () => {
             const { data } = await axios.get(
               "https://the-trivia-api.com/api/questions?limit=5"
@@ -71,9 +73,8 @@ app.get("/request", async (req, res) => {
           };
           getNewQuiz();
         } else {
-          console.log("quizset found on DB");
           const q = quizSet[0];
-          console.log(q.gameID);
+          console.log("quizset found in database", q.gameID);
           apiResponse.id = q.gameID;
           apiResponse.quizSet = [q.q1, q.q2, q.q3, q.q4, q.q5];
           res.json(apiResponse);

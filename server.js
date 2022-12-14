@@ -13,7 +13,7 @@ const { default: axios } = require("axios");
 
 mongoose.Promise = global.Promise;
 mongoose.connect(
-  `mongodb+srv://user:${process.env.MONGO}@cluster0.pos6yfq.mongodb.net/?retryWrites=true&w=majority`
+  `mongodb+srv://user:${process.env.MONGOPW}@cluster0.pos6yfq.mongodb.net/?retryWrites=true&w=majority`
 );
 
 const PORT = 1337;

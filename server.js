@@ -16,7 +16,7 @@ mongoose.connect(
   `mongodb+srv://user:${process.env.MONGOPW}@cluster0.pos6yfq.mongodb.net/?retryWrites=true&w=majority`
 );
 
-const PORT = 1337;
+const PORT = process.env.PORT || 1337;
 const app = express();
 
 // app.set("view-engine", ejs);
